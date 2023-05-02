@@ -1,5 +1,6 @@
 <script setup>
 import UniqueID from '../features/UniqueID'
+import BaseErrorMessage from './BaseErrorMessage.vue'
 
 defineProps({
   label: {
@@ -30,6 +31,9 @@ const uuid = UniqueID().getID()
         $emit('update:modelValue', $event.target.value)
       }
     }"
+    :aria-describedby="error ? `${uuid}-error` : null"
+    :aria-invalid="error ? true : false"
+    :class="{ error }"
   >
     <option
       v-for="option in options"
@@ -40,4 +44,7 @@ const uuid = UniqueID().getID()
       {{ option }}
     </option>
   </select>
+  <BaseErrorMessage v-if="error" :id="`${uuid}-error`">
+    {{ error }}
+  </BaseErrorMessage>
 </template>

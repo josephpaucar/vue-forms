@@ -1,4 +1,5 @@
 <script setup>
+import BaseErrorMessage from './BaseErrorMessage.vue'
 import UniqueID from '../features/UniqueID'
 
 defineProps({
@@ -29,13 +30,9 @@ const uuid = UniqueID().getID()
     :id="uuid"
     :aria-describedby="error ? `${uuid}-error` : null"
     :aria-invalid="error ? true : null"
+    :class="{ error }"
   />
-  <p
-    v-if="error"
-    class="errorMessage"
-    :id="`${uuid}-error`"
-    aria-live="assertive"
-  >
+  <BaseErrorMessage v-if="error" :id="`${uuid}-error`">
     {{ error }}
-  </p>
+  </BaseErrorMessage>
 </template>
