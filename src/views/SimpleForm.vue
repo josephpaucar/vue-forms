@@ -32,7 +32,17 @@ const event = ref({
 })
 
 function sendForm() {
-  // Here submission is handled
+  axios
+    .post(
+      'https://my-json-server.typicode.com/josephpaucar/vue-forms/events',
+      event
+    )
+    .then(function (response) {
+      console.log('Response', response)
+    })
+    .catch(function (err) {
+      console.log('Error', err)
+    })
 }
 </script>
 
@@ -46,34 +56,60 @@ function sendForm() {
         label="Select a category"
       />
 
-      <h3>Name & describe your event</h3>
+      <fieldset>
+        <legend>Name & describe your event</legend>
+        <BaseInput
+          v-model="event.title"
+          label="Title"
+          type="text"
+          error="This input has an error!"
+        />
+        <BaseInput
+          v-model="event.description"
+          label="Description"
+          type="text"
+        />
+      </fieldset>
 
-      <BaseInput v-model="event.title" label="Title" type="text" />
+      <fieldset>
+        <legend>Where is your event?</legend>
+        <BaseInput v-model="event.location" label="Location" type="text" />
+      </fieldset>
 
-      <BaseInput v-model="event.description" label="Description" type="text" />
-
-      <h3>Where is your event?</h3>
-
-      <BaseInput v-model="event.location" label="Location" type="text" />
-
-      <h3>Are pets allowed?</h3>
-      <div>
+      <fieldset>
+        <legend>Pets</legend>
+        <p>Are pets allowed?</p>
         <BaseRadioGroup
           v-model="event.pets"
           name="pets"
           :options="petOptions"
         />
-      </div>
+      </fieldset>
 
-      <h3>Extras</h3>
-      <div>
-        <BaseCheckbox v-model="event.extras.catering" label="Catering" />
-      </div>
-      <div>
-        <BaseCheckbox v-model="event.extras.music" label="Live music" />
-      </div>
+      <fieldset>
+        <legend>Extras</legend>
+        <div>
+          <BaseCheckbox v-model="event.extras.catering" label="Catering" />
+        </div>
+        <div>
+          <BaseCheckbox v-model="event.extras.music" label="Live music" />
+        </div>
+      </fieldset>
 
       <button class="button -fill-gradient" type="submit">Submit</button>
     </form>
   </div>
 </template>
+
+<style>
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+legend {
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+</style>

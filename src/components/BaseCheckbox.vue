@@ -1,4 +1,6 @@
 <script setup>
+import UniqueID from '../features/UniqueID'
+
 defineProps({
   label: {
     type: String,
@@ -9,6 +11,8 @@ defineProps({
     default: false
   }
 })
+
+const uuid = UniqueID().getID()
 </script>
 <template>
   <input
@@ -16,6 +20,7 @@ defineProps({
     :checked="modelValue"
     @change="$emit('update:modelValue', $event.target.checked)"
     class="field"
+    :id="uuid"
   />
-  <label v-if="label">{{ label }}</label>
+  <label :for="uuid" v-if="label">{{ label }}</label>
 </template>
