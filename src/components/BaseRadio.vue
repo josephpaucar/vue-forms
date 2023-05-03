@@ -14,6 +14,10 @@ defineProps({
   value: {
     type: [String, Number],
     required: true
+  },
+  error: {
+    type: String,
+    default: ''
   }
 })
 

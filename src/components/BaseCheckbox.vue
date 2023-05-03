@@ -10,6 +10,10 @@ defineProps({
   modelValue: {
     type: Boolean,
     default: false
+  },
+  error: {
+    type: String,
+    default: ''
   }
 })
 

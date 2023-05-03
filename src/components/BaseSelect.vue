@@ -14,6 +14,10 @@ defineProps({
   options: {
     type: Array,
     required: true
+  },
+  error: {
+    type: String,
+    default: ''
   }
 })
 

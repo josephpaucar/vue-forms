@@ -49,17 +49,27 @@ const validations = {
 //   validateEmail
 // )
 
-useForm({
+const { setFieldValue } = useForm({
   validationSchema: validations
 })
 
 const { value: email, errorMessage: emailError } = useField('email')
 const { value: password, errorMessage: passwordError } = useField('password')
+
+const handleChange = (event) => {
+  setFieldValue('email', event.target.value)
+}
 </script>
 
 <template>
   <form @submit.prevent="onSubmit">
-    <BaseInput label="Email" type="email" v-model="email" :error="emailError" />
+    <BaseInput
+      label="Email"
+      type="email"
+      :error="emailError"
+      :modelValue="email"
+      @change="handleChange"
+    />
 
     <BaseInput
       label="Password"
